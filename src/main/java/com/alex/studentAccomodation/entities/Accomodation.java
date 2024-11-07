@@ -1,4 +1,4 @@
-package com.alex.studentAccomodation.entity;
+package com.alex.studentAccomodation.entities;
 
 import com.alex.studentAccomodation.constants.AvailabilityStatus;
 import com.alex.studentAccomodation.constants.RoomType;
@@ -16,7 +16,7 @@ public class Accomodation {
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name= "owner_id", nullable = false)
-    private User owner; //foreign key to the user entity for OWNER
+    private SystemUser owner; //foreign key to the user entity for OWNER
 
     private String title;
 

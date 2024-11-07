@@ -1,4 +1,4 @@
-package com.alex.studentAccomodation.entity;
+package com.alex.studentAccomodation.entities;
 
 import com.alex.studentAccomodation.constants.Role;
 import jakarta.persistence.*;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-public class User {
+public class SystemUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
