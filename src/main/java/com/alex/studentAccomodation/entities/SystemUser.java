@@ -6,13 +6,18 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
-public class SystemUser {
+public class SystemUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -57,6 +62,26 @@ public class SystemUser {
         this.createdAt = createdAt;
         this.accomodations = accomodations;
         this.bookings = bookings;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities(){
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + this.role.name()));
+    }
+
+    @Override
+    public boolean isAccountNonExpired(){
+        return true; // TODO: determine how to customize this based on account expiration logic
+    }
+
+    @Override
+    public boolean isAccountNonLocked(){
+        return true; // TODO: Customize based on credential expiration logic.
+    }
+
+    @Override
+    public boolean isEnabled(){
+        return true; // Customize based on account enable/disable logic.
     }
 
     public UUID getId() {
