@@ -1,6 +1,6 @@
-package com.alex.studentAccomodation.entities;
+package com.alex.studentAccommodation.entities;
 
-import com.alex.studentAccomodation.constants.BookingStatus;
+import com.alex.studentAccommodation.constants.BookingStatus;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -20,7 +20,7 @@ public class Booking {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accommodation_id", nullable = false)
-    private Accomodation accommodation; // Foreign key to Accommodation entity
+    private Accommodation accommodation; // Foreign key to Accommodation entity
 
     private LocalDate startDate;
     private LocalDate endDate;

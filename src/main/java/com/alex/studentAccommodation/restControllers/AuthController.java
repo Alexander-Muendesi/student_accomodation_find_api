@@ -1,4 +1,4 @@
-package com.alex.studentAccomodation.rest_controllers;
+package com.alex.studentAccommodation.restControllers;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;

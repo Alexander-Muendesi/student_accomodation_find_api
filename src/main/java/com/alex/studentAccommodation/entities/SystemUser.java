@@ -1,6 +1,6 @@
-package com.alex.studentAccomodation.entities;
+package com.alex.studentAccommodation.entities;
 
-import com.alex.studentAccomodation.constants.Role;
+import com.alex.studentAccommodation.constants.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -24,18 +24,18 @@ public class SystemUser implements UserDetails {
 
     @Column(unique = true, nullable = false)
     @NotNull(message = "Username is required.")
-    @NotBlank(message = "Username is required.")
+    @NotBlank(message = "Non blank username is required.")
     private String username;
 
     @Column(nullable = false)
     @NotNull(message = "Password is required.")
-    @NotBlank(message = "Password is required.")
+    @NotBlank(message = "Non blank password is required.")
     private String password;
 
     @Column(unique = true, nullable = false)
     @Email(message="Valid email address is required.")
     @NotNull(message="Email is required.")
-    @NotBlank(message="Email is required.")
+    @NotBlank(message="Non blank email is required.")
     private String email;
 
     @Column(nullable = false)
@@ -47,20 +47,20 @@ public class SystemUser implements UserDetails {
     private Timestamp createdAt;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Accomodation> accomodations;
+    private List<Accommodation> accommodations;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Booking> bookings;
 
     public SystemUser(){}
 
-    public SystemUser(String username, String password, String email, Role role, Timestamp createdAt, List<Accomodation> accomodations, List<Booking> bookings) {
+    public SystemUser(String username, String password, String email, Role role, Timestamp createdAt, List<Accommodation> accommodations, List<Booking> bookings) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.role = role;
         this.createdAt = createdAt;
-        this.accomodations = accomodations;
+        this.accommodations = accommodations;
         this.bookings = bookings;
     }
 
@@ -132,12 +132,12 @@ public class SystemUser implements UserDetails {
         this.createdAt = createdAt;
     }
 
-    public List<Accomodation> getAccomodations() {
-        return accomodations;
+    public List<Accommodation> getAccomodations() {
+        return accommodations;
     }
 
-    public void setAccomodations(List<Accomodation> accomodations) {
-        this.accomodations = accomodations;
+    public void setAccomodations(List<Accommodation> accommodations) {
+        this.accommodations = accommodations;
     }
 
     public List<Booking> getBookings() {
@@ -157,7 +157,7 @@ public class SystemUser implements UserDetails {
                 ", email='" + email + '\'' +
                 ", role=" + role +
                 ", createdAt=" + createdAt +
-                ", accomodations=" + accomodations +
+                ", accomodations=" + accommodations +
                 ", bookings=" + bookings +
                 '}';
     }

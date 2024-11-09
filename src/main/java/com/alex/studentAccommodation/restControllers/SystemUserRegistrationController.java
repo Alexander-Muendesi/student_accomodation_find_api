@@ -1,9 +1,10 @@
-package com.alex.studentAccomodation.rest_controllers;
+package com.alex.studentAccommodation.restControllers;
 
-import com.alex.studentAccomodation.entities.SystemUser;
-import com.alex.studentAccomodation.services.SystemUserService;
+import com.alex.studentAccommodation.entities.SystemUser;
+import com.alex.studentAccommodation.services.SystemUserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,14 +18,8 @@ public class SystemUserRegistrationController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/system_users")
-    public SystemUser registerSystemUsers(@Valid @RequestBody SystemUser systemUser){
+    public ResponseEntity<SystemUser> registerSystemUsers(@Valid @RequestBody SystemUser systemUser){
         systemUser.setPassword(passwordEncoder.encode(systemUser.getPassword()));
-        return systemUserService.registerUser(systemUser);
+        return ResponseEntity.ok(systemUserService.registerUser(systemUser));
     }
-
-    @GetMapping("/test")
-    public String test(){
-        return "Hello world";
-    }
-
 }

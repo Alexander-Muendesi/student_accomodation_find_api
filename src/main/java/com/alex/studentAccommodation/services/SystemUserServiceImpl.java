@@ -1,7 +1,7 @@
-package com.alex.studentAccomodation.services;
+package com.alex.studentAccommodation.services;
 
-import com.alex.studentAccomodation.dao_repositories.SystemUserRepository;
-import com.alex.studentAccomodation.entities.SystemUser;
+import com.alex.studentAccommodation.daoRepositories.SystemUserRepository;
+import com.alex.studentAccommodation.entities.SystemUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

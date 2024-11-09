@@ -1,4 +1,4 @@
-package com.alex.studentAccomodation.constants;
+package com.alex.studentAccommodation.constants;
 
 public enum AvailabilityStatus {
     AVAILABLE,

@@ -1,7 +1,7 @@
-package com.alex.studentAccomodation.entities;
+package com.alex.studentAccommodation.entities;
 
-import com.alex.studentAccomodation.constants.AvailabilityStatus;
-import com.alex.studentAccomodation.constants.RoomType;
+import com.alex.studentAccommodation.constants.AvailabilityStatus;
+import com.alex.studentAccommodation.constants.RoomType;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-public class Accomodation {
+public class Accommodation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;

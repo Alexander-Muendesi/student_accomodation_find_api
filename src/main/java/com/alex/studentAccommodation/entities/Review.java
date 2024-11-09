@@ -1,4 +1,4 @@
-package com.alex.studentAccomodation.entities;
+package com.alex.studentAccommodation.entities;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -14,7 +14,7 @@ public class Review {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", nullable = false)
-    private Accomodation accommodation; // foreign key to Accommodation entity
+    private Accommodation accommodation; // foreign key to Accommodation entity
 
     private int rating;
 

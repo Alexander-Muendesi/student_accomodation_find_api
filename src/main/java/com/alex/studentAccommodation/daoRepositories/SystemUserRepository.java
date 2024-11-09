@@ -1,6 +1,6 @@
-package com.alex.studentAccomodation.dao_repositories;
+package com.alex.studentAccommodation.daoRepositories;
 
-import com.alex.studentAccomodation.entities.SystemUser;
+import com.alex.studentAccommodation.entities.SystemUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

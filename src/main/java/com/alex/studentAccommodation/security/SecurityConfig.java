@@ -1,6 +1,6 @@
-package com.alex.studentAccomodation.security;
+package com.alex.studentAccommodation.security;
 
-import com.alex.studentAccomodation.services.SystemUserServiceImpl;
+import com.alex.studentAccommodation.services.SystemUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
