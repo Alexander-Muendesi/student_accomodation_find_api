@@ -2,6 +2,8 @@ package com.alex.studentAccommodation.entities;
 
 import com.alex.studentAccommodation.constants.BookingStatus;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
@@ -22,10 +24,19 @@ public class Booking {
     @JoinColumn(name = "accommodation_id", nullable = false)
     private Accommodation accommodation; // Foreign key to Accommodation entity
 
+    @NotNull(message = "Booking must have a start date.")
+    @Temporal(TemporalType.DATE)
+    @NotBlank(message = "Booking start date cannot be empty.")
     private LocalDate startDate;
+
+    @NotBlank(message = "Booking end data cannot be empty.")
+    @NotNull(message = "Booking must have an end date")
+    @Temporal(TemporalType.DATE)
     private LocalDate endDate;
 
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "Booking status is required. Choose one of the following: PENDING, CONFIRMED, REJECTED")
+    @NotBlank(message = "Booking cannot be empty. Choose one of the following: PENDING, CONFIRMED, REJECTED.")
     private BookingStatus status;
 
     @CreationTimestamp
