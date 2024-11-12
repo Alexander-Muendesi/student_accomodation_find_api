@@ -33,4 +33,6 @@ public class Review {
 
     @CreationTimestamp
     private Timestamp createdAt;
+
+    public Review(){}
 }

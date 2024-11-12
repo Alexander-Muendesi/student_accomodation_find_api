@@ -18,34 +18,24 @@ public class Accommodation {
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name= "owner_id", nullable = false)
-    @NotNull(message = "Accommodation must have an owner.")
     private SystemUser owner; //foreign key to the user entity for OWNER
 
-    @NotNull(message = "Accommodation must have a title.")
-    @NotBlank(message = "Accommodation title cannot be empty.")
     private String title;
 
     @Column(columnDefinition = "TEXT")
-    @NotNull(message = "Accommodation must have a description.")
-    @NotBlank(message = "Accommodation description cannot be empty.")
     private String description;
 
-    @NotNull(message = "Accommodation must have a location.")
-    @NotBlank(message = "Accommodation location cannot be empty.")
     private String location;
 
-    @NotNull(message = "Accommodation must have a price per month")
     private BigDecimal pricePerMonth;
 
     @Enumerated(EnumType.STRING)
-    @NotNull(message = "Type of room must be specified. Options include SINGLE, DOUBLE, SHARED, STUDIO AND APARTMENT")
     private RoomType roomType;
 
     @ElementCollection
     private List<String> amenities;
 
     @Enumerated(EnumType.STRING)
-    @NotNull(message="Accommodation must have an availability status of AVAILABLE OR BOOKED.")
     private AvailabilityStatus availabilityStatus;
 
     @OneToMany(mappedBy = "accommodation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -53,6 +43,8 @@ public class Accommodation {
 
     @OneToMany(mappedBy = "accommodation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Review> reviews;
+
+    public Accommodation(){};
 
     public Accommodation(SystemUser owner, String title, String description, String location, BigDecimal pricePerMonth, RoomType roomType, List<String> amenities, AvailabilityStatus availabilityStatus, List<Booking> bookings, List<Review> reviews) {
         this.owner = owner;

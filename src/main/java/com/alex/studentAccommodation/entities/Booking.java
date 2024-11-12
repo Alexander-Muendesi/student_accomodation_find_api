@@ -41,4 +41,6 @@ public class Booking {
 
     @CreationTimestamp
     private Timestamp createdAt;
+
+    public Booking(){}
 }
