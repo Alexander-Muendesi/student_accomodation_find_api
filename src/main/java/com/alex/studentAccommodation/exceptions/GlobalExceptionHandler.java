@@ -49,4 +49,22 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
+
+    @ExceptionHandler(InvalidUUIDException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<Map<String, String>> handleInvalidUUIDException(InvalidUUIDException ex){
+        Map<String,String> error = new HashMap<>();
+        error.put("Error", ex.getLocalizedMessage());
+
+        return ResponseEntity.badRequest().body(error);
+    }
+
+    @ExceptionHandler(AccommodationNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Map<String,String>> handleAccommodationNotFoundException(AccommodationNotFoundException ex){
+        Map<String,String> error = new HashMap<>();
+        error.put("Error", ex.getLocalizedMessage());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
 }

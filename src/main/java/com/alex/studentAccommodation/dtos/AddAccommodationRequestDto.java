@@ -10,9 +10,9 @@ import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class AccommodationRequestDto {
+public class AddAccommodationRequestDto {
     @NotBlank(message = "Owner Id is required.")
-    private String owner_id;
+    private String ownerId;
 
     @NotBlank(message = "Title is required.")
     private String title;
@@ -38,8 +38,8 @@ public class AccommodationRequestDto {
     private List<Booking> bookings;
     private List<Review> reviews;
 
-    public AccommodationRequestDto(String owner_id, String title, String description, String location, BigDecimal pricePerMonth, RoomType roomType, List<String> amenities, AvailabilityStatus availabilityStatus, List<Booking> bookings, List<Review> reviews) {
-        this.owner_id = owner_id;
+    public AddAccommodationRequestDto(String ownerId, String title, String description, String location, BigDecimal pricePerMonth, RoomType roomType, List<String> amenities, AvailabilityStatus availabilityStatus, List<Booking> bookings, List<Review> reviews) {
+        this.ownerId = ownerId;
         this.title = title;
         this.description = description;
         this.location = location;
@@ -51,12 +51,12 @@ public class AccommodationRequestDto {
         this.reviews = reviews;
     }
 
-    public @NotBlank(message = "Owner Id is required.") String getOwner_id() {
-        return owner_id;
+    public @NotBlank(message = "Owner Id is required.") String getOwnerId() {
+        return ownerId;
     }
 
-    public void setOwner_id(@NotBlank(message = "Owner Id is required.") String owner_id) {
-        this.owner_id = owner_id;
+    public void setOwner_id(@NotBlank(message = "Owner Id is required.") String ownerId) {
+        this.ownerId = ownerId;
     }
 
     public @NotBlank(message = "Title is required.") String getTitle() {
@@ -134,7 +134,7 @@ public class AccommodationRequestDto {
     @Override
     public String toString() {
         return "AccommodationRequestDto{" +
-                "owner_id='" + owner_id + '\'' +
+                "owner_id='" + ownerId + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", location='" + location + '\'' +

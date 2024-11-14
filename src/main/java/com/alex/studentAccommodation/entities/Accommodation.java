@@ -3,6 +3,7 @@ package com.alex.studentAccommodation.entities;
 import com.alex.studentAccommodation.constants.AvailabilityStatus;
 import com.alex.studentAccommodation.constants.RoomType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -19,7 +20,6 @@ public class Accommodation {
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name= "owner_id", nullable = false)
-    @JsonIgnore
     private SystemUser owner; //foreign key to the user entity for OWNER
 
     private String title;
