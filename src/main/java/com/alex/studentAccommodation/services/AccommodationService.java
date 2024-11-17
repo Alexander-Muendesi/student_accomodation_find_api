@@ -9,4 +9,6 @@ public interface AccommodationService {
     AccommodationResponseDto addAccommodation(AddAccommodationRequestDto request);
 
     AccommodationResponseDto getAccommodation(String accommodationId);
+
+    String deleteAccommodation(@Valid String accommodationId);
 }

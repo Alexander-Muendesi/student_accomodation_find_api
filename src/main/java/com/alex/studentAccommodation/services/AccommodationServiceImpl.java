@@ -80,6 +80,26 @@ public class AccommodationServiceImpl implements AccommodationService{
         }
     }
 
+    @Override
+    public String deleteAccommodation(String accommodationId) {
+        UUID uuudAccommodationId = null;
+        try{
+            uuudAccommodationId = UUID.fromString(accommodationId);
+        }
+        catch(IllegalArgumentException ex){
+            throw new InvalidUUIDException("Accomodation Id provided is not a valid UUID string: " + accommodationId);
+        }
+
+        Optional<Accommodation> accommodation = accommodationRepository.findById(uuudAccommodationId);
+
+        if(accommodation.isPresent()){
+            accommodationRepository.deleteById(uuudAccommodationId);
+            return "Accommodation ID: " + accommodationId + ". Deleted successfully";
+        }
+        else
+            throw new AccommodationNotFoundException("Accommodation with id " + accommodationId + " does not exist.");
+    }
+
     private AccommodationResponseDto extractInfoFromAccommodationEntity(Accommodation accommodation){
         return new AccommodationResponseDto(
                 accommodation.getId(),

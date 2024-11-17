@@ -24,4 +24,10 @@ public class AccommodationController {
     public ResponseEntity<AccommodationResponseDto> addAccommodation(@Valid @RequestBody AddAccommodationRequestDto request){
         return ResponseEntity.ok(accommodationService.addAccommodation(request));
     }
+
+    @DeleteMapping("/accommodations/{accommodationId}")
+    public ResponseEntity<String> deleteAccommodation(@Valid @PathVariable String accommodationId)
+    {
+        return ResponseEntity.ok(accommodationService.deleteAccommodation(accommodationId));
+    }
 }
