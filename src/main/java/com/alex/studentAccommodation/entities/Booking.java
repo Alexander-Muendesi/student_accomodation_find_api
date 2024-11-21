@@ -43,4 +43,12 @@ public class Booking {
     private Timestamp createdAt;
 
     public Booking(){}
+
+    public Booking(SystemUser student, Accommodation accommodation, LocalDate startDate, LocalDate endDate, BookingStatus status) {
+        this.student = student;
+        this.accommodation = accommodation;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+    }
 }
