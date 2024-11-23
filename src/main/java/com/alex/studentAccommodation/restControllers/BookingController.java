@@ -22,4 +22,9 @@ public class BookingController {
     public ResponseEntity<BookingResponseDto> getBooking(@PathVariable  String bookingId){
         return ResponseEntity.ok(bookingService.getBooking(bookingId));
     }
+
+    @DeleteMapping("/bookings/{bookingId}")
+    public ResponseEntity<String> deleteBooking(@PathVariable String bookingId){
+        return ResponseEntity.ok(bookingService.removeBooking(bookingId));
+    }
 }

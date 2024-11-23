@@ -97,6 +97,19 @@ public class BookingServiceImpl implements  BookingService{
             throw new BookingNotFoundException("Booking with id {" + bookingId + "} does not exist.");
     }
 
+    @Override
+    public String removeBooking(String bookingId) {
+        UUID bookingIdUuid = validateUUIDString(bookingId, "removeBooking");
+        Optional<Booking> bookingOptional = bookingRepository.findById(bookingIdUuid);
+
+        if(bookingOptional.isPresent()){
+            bookingRepository.deleteById(bookingIdUuid);
+            return "Booking with id: " + bookingId + " has been deleted successfully.";
+        }
+        else
+            throw new BookingNotFoundException("Booking with id {"+ bookingId + "} does not exist.");
+    }
+
     private UUID validateUUIDString(String uuid, String type){
         try{
             return UUID.fromString(uuid);
