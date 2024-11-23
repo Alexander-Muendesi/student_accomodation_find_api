@@ -1,5 +1,6 @@
 package com.alex.studentAccommodation.exceptions;
 
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -62,6 +63,15 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AccommodationNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Map<String,String>> handleAccommodationNotFoundException(AccommodationNotFoundException ex){
+        Map<String,String> error = new HashMap<>();
+        error.put("Error", ex.getLocalizedMessage());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    @ExceptionHandler(BookingNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Map<String,String>> handleBookingNotFoundException(BookingNotFoundException ex){
         Map<String,String> error = new HashMap<>();
         error.put("Error", ex.getLocalizedMessage());
 

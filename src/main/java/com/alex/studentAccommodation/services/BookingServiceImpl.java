@@ -8,7 +8,7 @@ import com.alex.studentAccommodation.dtos.BookingResponseDto;
 import com.alex.studentAccommodation.entities.Accommodation;
 import com.alex.studentAccommodation.entities.Booking;
 import com.alex.studentAccommodation.entities.SystemUser;
-import com.alex.studentAccommodation.exceptions.AccommodationNotFoundException;
+import com.alex.studentAccommodation.exceptions.BookingNotFoundException;
 import com.alex.studentAccommodation.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,6 @@ public class BookingServiceImpl implements  BookingService{
 
     @Override
     public BookingResponseDto addBooking(AddBookingRequestDto request) {
-        System.out.println(request);
         UUID userId = validateUUIDString(request.getUserId(),"user");
         UUID accommodationId = validateUUIDString(request.getAccommodationId(), "accommodation");
 
@@ -54,7 +53,7 @@ public class BookingServiceImpl implements  BookingService{
             accommodation = accommodationOptional.get();
         }
         else{
-            throw new AccommodationNotFoundException("Accommodation with id {" + request.getAccommodationId() + "} does not exist");
+            throw new BookingNotFoundException("Accommodation with id {" + request.getAccommodationId() + "} does not exist");
         }
 
         Booking booking = bookingRepository.save(new Booking(
@@ -74,6 +73,28 @@ public class BookingServiceImpl implements  BookingService{
                 booking.getStatus(),
                 booking.getCreatedAt()
         );
+    }
+
+    @Override
+    public BookingResponseDto getBooking(String bookingId) {
+        UUID bookingIdUuid = validateUUIDString(bookingId,"getBooking");
+        Optional<Booking> bookingOptional = bookingRepository.findById(bookingIdUuid);
+
+        if(bookingOptional.isPresent()){
+            Booking booking = bookingOptional.get();
+
+            return new BookingResponseDto(
+                booking.getId(),
+                booking.getStudent().getId(),
+                booking.getAccommodation().getId(),
+                booking.getStartDate(),
+                booking.getEndDate(),
+                booking.getStatus(),
+                booking.getCreatedAt()
+            );
+        }
+        else
+            throw new BookingNotFoundException("Booking with id {" + bookingId + "} does not exist.");
     }
 
     private UUID validateUUIDString(String uuid, String type){
