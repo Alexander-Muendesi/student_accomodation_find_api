@@ -5,6 +5,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 public class AddBookingRequestDto {
     @NotBlank(message = "User Id cannot be blank")
@@ -14,6 +15,7 @@ public class AddBookingRequestDto {
     private String accommodationId;
 
     @NotBlank(message = "Booking must have a start date")
+    @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Date must be in the format yyyy-MM-dd.")
     private String startDate;
 
     @NotBlank(message = "Booking must have an end date")

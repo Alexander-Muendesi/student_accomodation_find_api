@@ -24,19 +24,13 @@ public class Booking {
     @JoinColumn(name = "accommodation_id", nullable = false)
     private Accommodation accommodation; // Foreign key to Accommodation entity
 
-    @NotNull(message = "Booking must have a start date.")
     @Temporal(TemporalType.DATE)
-    @NotBlank(message = "Booking start date cannot be empty.")
     private LocalDate startDate;
 
-    @NotBlank(message = "Booking end data cannot be empty.")
-    @NotNull(message = "Booking must have an end date")
     @Temporal(TemporalType.DATE)
     private LocalDate endDate;
 
     @Enumerated(EnumType.STRING)
-    @NotNull(message = "Booking status is required. Choose one of the following: PENDING, CONFIRMED, REJECTED")
-    @NotBlank(message = "Booking cannot be empty. Choose one of the following: PENDING, CONFIRMED, REJECTED.")
     private BookingStatus status;
 
     @CreationTimestamp
@@ -50,5 +44,61 @@ public class Booking {
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public SystemUser getStudent() {
+        return student;
+    }
+
+    public void setStudent(SystemUser student) {
+        this.student = student;
+    }
+
+    public Accommodation getAccommodation() {
+        return accommodation;
+    }
+
+    public void setAccommodation(Accommodation accommodation) {
+        this.accommodation = accommodation;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public BookingStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BookingStatus status) {
+        this.status = status;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 }
