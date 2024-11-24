@@ -14,25 +14,78 @@ import java.util.UUID;
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id; //foreign key to User entity for STUDENT
+    private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_id", nullable = false)
+    @JoinColumn(name="owner_id", nullable = false)
+    private SystemUser user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "accommodation_id", nullable = false)
     private Accommodation accommodation; // foreign key to Accommodation entity
 
-    @NotNull(message = "Value for rating is required.")
-    @NotBlank(message = "Value for rating is required.")
-    @Min(value = 0, message = "Rating must be at least 0.")
-    @Max(value = 5, message = "Rating must be at most 10")
     private int rating;
 
     @Column(columnDefinition = "TEXT")
-    @NotBlank(message = "A review requires a description.")
-    @NotNull(message = "A review requires a description.")
     private String description;
 
     @CreationTimestamp
     private Timestamp createdAt;
 
     public Review(){}
+
+    public Review(SystemUser user, Accommodation accommodation, int rating, String description) {
+        this.user = user;
+        this.accommodation = accommodation;
+        this.rating = rating;
+        this.description = description;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public SystemUser getUser() {
+        return user;
+    }
+
+    public void setUser(SystemUser user) {
+        this.user = user;
+    }
+
+    public Accommodation getAccommodation() {
+        return accommodation;
+    }
+
+    public void setAccommodation(Accommodation accommodation) {
+        this.accommodation = accommodation;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
 }
