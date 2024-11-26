@@ -42,5 +42,5 @@
   - A **rating** and a **description**, visible on the listing.
 
 ## Session Management and Security
-- Ensure secure session handling with **tokens** or **cookies**.
+- Ensure secure session handling with **tokens**, **sessions** or **cookies**.
 - Use **role-based authorization** to restrict access to certain endpoints.
