@@ -10,6 +10,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -147,5 +148,18 @@ public class Accommodation {
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Accommodation that = (Accommodation) o;
+        return Objects.equals(id, that.id) && Objects.equals(title, that.title) && Objects.equals(description, that.description) && Objects.equals(location, that.location) && Objects.equals(pricePerMonth, that.pricePerMonth) && roomType == that.roomType && availabilityStatus == that.availabilityStatus;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, description, location, pricePerMonth, roomType, availabilityStatus);
     }
 }

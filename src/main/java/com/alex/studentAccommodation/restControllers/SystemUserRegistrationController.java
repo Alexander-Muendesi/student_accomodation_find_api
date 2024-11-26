@@ -1,5 +1,7 @@
 package com.alex.studentAccommodation.restControllers;
 
+import com.alex.studentAccommodation.dtos.AddSystemUserRequestDto;
+import com.alex.studentAccommodation.dtos.SystemUserResponseDto;
 import com.alex.studentAccommodation.entities.SystemUser;
 import com.alex.studentAccommodation.services.SystemUserService;
 import jakarta.validation.Valid;
@@ -18,7 +20,7 @@ public class SystemUserRegistrationController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/system_users")
-    public ResponseEntity<SystemUser> registerSystemUsers(@Valid @RequestBody SystemUser systemUser){
+    public ResponseEntity<SystemUserResponseDto> registerSystemUsers(@Valid @RequestBody AddSystemUserRequestDto systemUser){
         systemUser.setPassword(passwordEncoder.encode(systemUser.getPassword()));
         return ResponseEntity.ok(systemUserService.registerUser(systemUser));
     }

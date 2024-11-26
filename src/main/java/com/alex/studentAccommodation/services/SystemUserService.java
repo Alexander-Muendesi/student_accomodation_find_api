@@ -1,7 +1,9 @@
 package com.alex.studentAccommodation.services;
 
+import com.alex.studentAccommodation.dtos.AddSystemUserRequestDto;
+import com.alex.studentAccommodation.dtos.SystemUserResponseDto;
 import com.alex.studentAccommodation.entities.SystemUser;
 
 public interface SystemUserService {
-    SystemUser registerUser(SystemUser user);
+    SystemUserResponseDto registerUser(AddSystemUserRequestDto user);
 }

@@ -13,6 +13,7 @@ import com.alex.studentAccommodation.exceptions.ReviewNotFoundException;
 import com.alex.studentAccommodation.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -29,6 +30,7 @@ public class ReviewServiceImpl implements ReviewService{
     private AccommodationRepository accommodationRepository;
 
     @Override
+    @Transactional
     public ReviewResponseDto addReview(AddReviewRequestDto request) {
         UUID userId = validateUuid(request.getUserId(), "addReview User");
         UUID accommodationId = validateUuid(request.getAccommodationId(), "addReview Accommodation");
@@ -84,6 +86,7 @@ public class ReviewServiceImpl implements ReviewService{
     }
 
     @Override
+    @Transactional
     public String deleteReview(String reviewId) {
         UUID reviewIdUuid = validateUuid(reviewId, "deleteReview");
 

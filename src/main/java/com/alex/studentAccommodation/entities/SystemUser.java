@@ -2,19 +2,13 @@ package com.alex.studentAccommodation.entities;
 
 import com.alex.studentAccommodation.constants.Role;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Timestamp;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 public class SystemUser implements UserDetails {
@@ -23,45 +17,52 @@ public class SystemUser implements UserDetails {
     private UUID id;
 
     @Column(unique = true, nullable = false)
-    @NotNull(message = "Username is required.")
-    @NotBlank(message = "Non blank username is required.")
     private String username;
 
     @Column(nullable = false)
-    @NotNull(message = "Password is required.")
-    @NotBlank(message = "Non blank password is required.")
     private String password;
 
     @Column(unique = true, nullable = false)
-    @Email(message="Valid email address is required.")
-    @NotNull(message="Email is required.")
-    @NotBlank(message="Non blank email is required.")
     private String email;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    @NotNull(message="Role is required.")
     private Role role; // Enum for STUDENT or Owner
 
     @CreationTimestamp
     private Timestamp createdAt;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Accommodation> accommodations;
+    private Set<Accommodation> accommodations;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Booking> bookings;
+    private Set<Booking> bookings;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Review> reviews;
+
+    public Set<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Set<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public Set<Accommodation> getAccommodations() {
+        return accommodations;
+    }
+
+    public void setAccommodations(Set<Accommodation> accommodations) {
+        this.accommodations = accommodations;
+    }
 
     public SystemUser(){}
 
-    public SystemUser(String username, String password, String email, Role role, Timestamp createdAt, List<Accommodation> accommodations, List<Booking> bookings) {
+    public SystemUser(String username, String password, String email, Role role) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.role = role;
-        this.createdAt = createdAt;
-        this.accommodations = accommodations;
-        this.bookings = bookings;
     }
 
     @Override
@@ -132,19 +133,19 @@ public class SystemUser implements UserDetails {
         this.createdAt = createdAt;
     }
 
-    public List<Accommodation> getAccomodations() {
+    public Set<Accommodation> getAccomodations() {
         return accommodations;
     }
 
-    public void setAccomodations(List<Accommodation> accommodations) {
+    public void setAccomodations(Set<Accommodation> accommodations) {
         this.accommodations = accommodations;
     }
 
-    public List<Booking> getBookings() {
+    public Set<Booking> getBookings() {
         return bookings;
     }
 
-    public void setBookings(List<Booking> bookings) {
+    public void setBookings(Set<Booking> bookings) {
         this.bookings = bookings;
     }
 

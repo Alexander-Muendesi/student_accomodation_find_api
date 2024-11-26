@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -87,5 +88,18 @@ public class Review {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Review review = (Review) o;
+        return rating == review.rating && Objects.equals(id, review.id) && Objects.equals(user, review.user) && Objects.equals(accommodation, review.accommodation) && Objects.equals(description, review.description) && Objects.equals(createdAt, review.createdAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(user, accommodation, rating, description);
     }
 }

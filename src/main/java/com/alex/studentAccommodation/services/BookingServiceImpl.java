@@ -12,6 +12,7 @@ import com.alex.studentAccommodation.exceptions.BookingNotFoundException;
 import com.alex.studentAccommodation.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -30,6 +31,7 @@ public class BookingServiceImpl implements  BookingService{
     private AccommodationRepository accommodationRepository;
 
     @Override
+    @Transactional
     public BookingResponseDto addBooking(AddBookingRequestDto request) {
         UUID userId = validateUUIDString(request.getUserId(),"user");
         UUID accommodationId = validateUUIDString(request.getAccommodationId(), "accommodation");
@@ -98,6 +100,7 @@ public class BookingServiceImpl implements  BookingService{
     }
 
     @Override
+    @Transactional
     public String removeBooking(String bookingId) {
         UUID bookingIdUuid = validateUUIDString(bookingId, "removeBooking");
         Optional<Booking> bookingOptional = bookingRepository.findById(bookingIdUuid);
