@@ -2,9 +2,6 @@ package com.alex.studentAccommodation.entities;
 
 import com.alex.studentAccommodation.constants.Role;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,24 +17,15 @@ public class SystemUser implements UserDetails {
     private UUID id;
 
     @Column(unique = true, nullable = false)
-    @NotNull(message = "Username is required.")
-    @NotBlank(message = "Non blank username is required.")
     private String username;
 
     @Column(nullable = false)
-    @NotNull(message = "Password is required.")
-    @NotBlank(message = "Non blank password is required.")
     private String password;
 
     @Column(unique = true, nullable = false)
-    @Email(message="Valid email address is required.")
-    @NotNull(message="Email is required.")
-    @NotBlank(message="Non blank email is required.")
     private String email;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    @NotNull(message="Role is required.")
     private Role role; // Enum for STUDENT or Owner
 
     @CreationTimestamp
@@ -70,14 +58,11 @@ public class SystemUser implements UserDetails {
 
     public SystemUser(){}
 
-    public SystemUser(String username, String password, String email, Role role, Timestamp createdAt, Set<Accommodation> accommodations, Set<Booking> bookings) {
+    public SystemUser(String username, String password, String email, Role role) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.role = role;
-        this.createdAt = createdAt;
-        this.accommodations = accommodations;
-        this.bookings = bookings;
     }
 
     @Override

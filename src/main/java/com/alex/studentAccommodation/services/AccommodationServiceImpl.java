@@ -12,6 +12,7 @@ import com.alex.studentAccommodation.exceptions.InvalidUUIDException;
 import com.alex.studentAccommodation.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -25,6 +26,7 @@ public class AccommodationServiceImpl implements AccommodationService{
     SystemUserRepository systemUserRepository;
 
     @Override
+    @Transactional
     public AccommodationResponseDto addAccommodation(AddAccommodationRequestDto request) {
         UUID owner_id = null;
         try{
@@ -81,6 +83,7 @@ public class AccommodationServiceImpl implements AccommodationService{
     }
 
     @Override
+    @Transactional
     public String deleteAccommodation(String accommodationId) {
         UUID uuudAccommodationId = null;
         try{

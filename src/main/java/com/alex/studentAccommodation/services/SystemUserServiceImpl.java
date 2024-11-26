@@ -1,6 +1,8 @@
 package com.alex.studentAccommodation.services;
 
 import com.alex.studentAccommodation.daoRepositories.SystemUserRepository;
+import com.alex.studentAccommodation.dtos.AddSystemUserRequestDto;
+import com.alex.studentAccommodation.dtos.SystemUserResponseDto;
 import com.alex.studentAccommodation.entities.SystemUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,8 +20,23 @@ public class SystemUserServiceImpl implements SystemUserService, UserDetailsServ
 
     @Override
     @Transactional
-    public SystemUser registerUser(SystemUser user) {
-        return systemUserRepository.save(user);
+    public SystemUserResponseDto registerUser(AddSystemUserRequestDto user) {
+        SystemUser systemUser = new SystemUser(
+                user.getUsername(),
+                user.getPassword(),
+                user.getEmail(),
+                user.getRole()
+        );
+
+        SystemUser savedSystemUser = systemUserRepository.save(systemUser);
+
+        return new SystemUserResponseDto(
+                systemUser.getId(),
+                systemUser.getUsername(),
+                systemUser.getEmail(),
+                systemUser.getRole(),
+                systemUser.getCreatedAt()
+        );
     }
 
     @Override
