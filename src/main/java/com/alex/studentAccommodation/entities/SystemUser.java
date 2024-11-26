@@ -11,10 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Timestamp;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 public class SystemUser implements UserDetails {
@@ -47,14 +44,33 @@ public class SystemUser implements UserDetails {
     private Timestamp createdAt;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Accommodation> accommodations;
+    private Set<Accommodation> accommodations;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Booking> bookings;
+    private Set<Booking> bookings;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Review> reviews;
+
+    public Set<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Set<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public Set<Accommodation> getAccommodations() {
+        return accommodations;
+    }
+
+    public void setAccommodations(Set<Accommodation> accommodations) {
+        this.accommodations = accommodations;
+    }
 
     public SystemUser(){}
 
-    public SystemUser(String username, String password, String email, Role role, Timestamp createdAt, List<Accommodation> accommodations, List<Booking> bookings) {
+    public SystemUser(String username, String password, String email, Role role, Timestamp createdAt, Set<Accommodation> accommodations, Set<Booking> bookings) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -132,19 +148,19 @@ public class SystemUser implements UserDetails {
         this.createdAt = createdAt;
     }
 
-    public List<Accommodation> getAccomodations() {
+    public Set<Accommodation> getAccomodations() {
         return accommodations;
     }
 
-    public void setAccomodations(List<Accommodation> accommodations) {
+    public void setAccomodations(Set<Accommodation> accommodations) {
         this.accommodations = accommodations;
     }
 
-    public List<Booking> getBookings() {
+    public Set<Booking> getBookings() {
         return bookings;
     }
 
-    public void setBookings(List<Booking> bookings) {
+    public void setBookings(Set<Booking> bookings) {
         this.bookings = bookings;
     }
 
